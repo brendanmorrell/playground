@@ -1,10 +1,13 @@
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
   watch: true,
   target: 'electron-renderer',
-  entry: './app/index.js',
+  entry: path.join(__dirname, 'app', 'index.js'),
   output: {
-    path: __dirname + '/build',
-    publicPath: 'build/',
+    path: path.join(__dirname, 'build'),
+    publicPath: 'build',
     filename: 'bundle.js',
   },
   module: {
@@ -15,10 +18,14 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s?(c|a)ss$/,
-        use: ['css-loader', 'sass-loader'],
-        exclude: /node_modules/,
+        test: /\.(sa|sc|c)ss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
     ],
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'bundle.css',
+    }),
+  ],
 };

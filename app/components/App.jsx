@@ -1,5 +1,6 @@
 import React from 'react';
 import ExcelIO from './ExcelIO.jsx';
+import '../styles/styles.scss';
 
 export default () => (
   <div>
@@ -7,4 +8,3 @@ export default () => (
     <ExcelIO />
   </div>
 );
-
